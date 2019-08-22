@@ -3,6 +3,6 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("HELLO THIS IS THE MENU")
+def main_menu(request):
+    return render(request, 'menu/main_menu.html', {})
 
