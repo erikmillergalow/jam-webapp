@@ -33,5 +33,23 @@
 </nav>
 
 <body>
+  What session would you like to join?<br/>
+  <input id="session-name-input" type="text" size="100"/><br/>
+  <input id="session-name-submit" type="button" value="Join"/><br/>
+
+  <script>
+    document.querySelector('#session-name-input').focus();
+    document.querySelector('#session-name-input').onkeyup = function(e) {
+      if (e.keyCode === 13) { // enter, return
+        document.querySelector('#session-name-input').click();
+      }
+
+      documnet.querySelector('#session-name-submit').onclick = function(e) {
+        var sessionName = document.querySelector('#session-name-input').value;
+        window.location.pathname= '/session/' + sessionName + '/';
+      };
+  </script>
+
+
 </body>
 </html>
