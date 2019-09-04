@@ -50,3 +50,5 @@ coverage.xml
 docs/_build/
 
 *.swp
+
+db.sqlite3
