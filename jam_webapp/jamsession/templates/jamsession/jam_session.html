@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>jam-session</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">jam-webapp</a>
+    </div>
+
+    <!-- main buttons on left navbar -->
+    <ul class="nav navbar-nav">
+      <li><a href="#">New Session</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+
+    <!-- profile specific options on right navbar -->
+
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+    </ul>
+
+  </div>
+</nav
+
+<body>
+  <textarea id="chat-log", cols="100", rows="20"></textarea><br/>
+  <input id="chat-message-input" type="text" size="100"/><br/>
+  <input id="chat-message-send" type="button" value="Send"/><br/>
+</body>
+
+<script>
+  var sessionName = {{ session_name_json }};
+
+  var chatSocket = new WebSocket(
+    'ws://' + window.location.host + '/ws/chat/' + sessionName + '/');
+
+  chatSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var message = data['message'];
+    document.querySelector('#chat-log').value += (message + '\n');
+  };
+
+  chatSocket.onclose = function(e) {
+    console.error('Jam session chat socket closed unexpectedly');
+  };
+
+  document.querySelector('#chat-message-input').focus();
+  document.querySelector('#chat-message-input').onkeyup = function(e) {
+    if (e.keyCode === 13) {
+      document.querySelector('#chat-message-send').click();
+    }
+  };
+
+  document.querySelector('#chat-message-send').onclick = function(e) {
+    var messageInputDom = document.querySelector('#chat-message-input');
+    var message = messageInputDom.value;
+    chatSocket.send(JSON.stringify({
+      'message': message
+    }));
+
+    messageInputDom.value = '';
+  };
+</script>
+</html>
+

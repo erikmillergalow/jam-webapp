@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+from jamsession import views
+
 urlpatterns = [
     path('menu/', include('menu.urls')),
     path('admin/', admin.site.urls),
     path('', RedirectView.as_view(url='menu/', permanent=True)),
+    path('jamsession/<str:jam_session_name>/', views.jam_session, name='jamsession'),
 ]
