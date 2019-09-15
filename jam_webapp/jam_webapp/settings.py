@@ -119,6 +119,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS= [
+    '/Users/emillergalow/src/jam_webapp/jam_webapp/jamsession/static',
+]
+
 # Channels
 ASGI_APPLICATION = 'jam_webapp.routing.application'
 CHANNEL_LAYERS = {

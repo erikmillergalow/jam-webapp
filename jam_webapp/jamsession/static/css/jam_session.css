@@ -1,0 +1,7 @@
+.max-window-height {
+  height: 100vh;
+}
+
+#chat-log {
+  height: 75vh;
+}
