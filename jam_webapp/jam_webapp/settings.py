@@ -120,7 +120,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS= [
-    '/Users/emillergalow/src/jam_webapp/jam_webapp/jamsession/static',
+    os.path.join(BASE_DIR, 'jamsession/static'),
 ]
 
 # Channels
