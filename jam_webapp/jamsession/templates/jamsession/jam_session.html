@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,34 +8,45 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{% static 'css/jam_session.css' %}">
 </head>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">jam-webapp</a>
+<body class="max-window-height">
+  <div class="container-fluid max-window-height">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">jam-webapp</a>
+        </div>
+    
+        <!-- main buttons on left navbar -->
+        <ul class="nav navbar-nav">
+          <li><a href="#">New Session</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+    
+        <!-- profile specific options on right navbar -->
+    
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+        </ul>
+    
+      </div>
+    </nav>
+
+
+    <div class="col-md-8 max-window-height">
+    </div>
+    <div class="col-sm-4 max-window-height">
+      <textarea class="form-control rounded-0" id="chat-log", cols="100", rows="20"></textarea><br/>
+      <input class="form-control rounded-0" id="chat-message-input" type="text" size="100"/><br/>
+      <input class="btn btn-primary btn-block" id="chat-message-send" type="button" value="Send"/><br/>
     </div>
 
-    <!-- main buttons on left navbar -->
-    <ul class="nav navbar-nav">
-      <li><a href="#">New Session</a></li>
-      <li><a href="#">Settings</a></li>
-    </ul>
-
-    <!-- profile specific options on right navbar -->
-
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-    </ul>
 
   </div>
-</nav
-
-<body>
-  <textarea id="chat-log", cols="100", rows="20"></textarea><br/>
-  <input id="chat-message-input" type="text" size="100"/><br/>
-  <input id="chat-message-send" type="button" value="Send"/><br/>
 </body>
 
 <script>
