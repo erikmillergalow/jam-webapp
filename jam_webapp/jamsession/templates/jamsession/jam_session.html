@@ -36,10 +36,13 @@
       </div>
     </nav>
 
+    <!-- instrument area -->
+    <div id="jam-space" class="col-md-8 max-window-height">
 
-    <div class="col-md-8 max-window-height">
     </div>
-    <div class="col-sm-4 max-window-height">
+
+    <!-- chat area -->
+    <div id= "chat-space" class="col-sm-4 max-window-height">
       <textarea class="form-control rounded-0" id="chat-log", cols="100", rows="20"></textarea><br/>
       <input class="form-control rounded-0" id="chat-message-input" type="text" size="100"/><br/>
       <input class="btn btn-primary btn-block" id="chat-message-send" type="button" value="Send"/><br/>
@@ -81,6 +84,22 @@
 
     messageInputDom.value = '';
   };
+
 </script>
+
+<script>
+  for (var i = 0; i < 20; i++) {
+    for (var j = 0; j < 16; j++) {
+      var div = document.createElement("div");
+      div.style.width = "20px";
+      div.style.height = "10px";
+      div.style.background = "blue";
+      document.getElementById("jam-space").appendChild(div);
+    }
+    var endLine = document.createElement("br");
+    document.getElementById("jam-space").appendChild(endLine);;
+  };
+</script>
+
 </html>
 

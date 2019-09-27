@@ -5,3 +5,8 @@
 #chat-log {
   height: 75vh;
 }
+
+#jam-space {
+  display: inline-block;
+  vertical-align: top;
+}
