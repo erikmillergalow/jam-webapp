@@ -103,9 +103,11 @@
 
 <script>
   $(function() {
+
     $(".cell").click(function() {
-      $(this).css("background-color", "green");
+      $(this).toggleClass("active-cell");
     });
+
   });
 </script>
 

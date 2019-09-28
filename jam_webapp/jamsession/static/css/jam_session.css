@@ -2,6 +2,14 @@
   height: 100vh;
 }
 
+.cell {
+  background-color: white;
+}
+
+.active-cell {
+  background-color: green;
+}
+
 #chat-log {
   height: 75vh;
 }
