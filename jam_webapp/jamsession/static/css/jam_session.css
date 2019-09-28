@@ -6,7 +6,10 @@
   height: 75vh;
 }
 
-#jam-space {
+#jam-space div {
   display: inline-block;
   vertical-align: top;
+  border: 2px solid blue;
+  width: 40px;
+  height: 20px;
 }

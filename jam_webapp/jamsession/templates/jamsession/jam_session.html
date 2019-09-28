@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/jam_session.css' %}">
 </head>
@@ -88,18 +89,24 @@
 </script>
 
 <script>
+  <!-- create MIDI grid -->
   for (var i = 0; i < 20; i++) {
     for (var j = 0; j < 16; j++) {
       var div = document.createElement("div");
-      div.style.width = "20px";
-      div.style.height = "10px";
-      div.style.background = "blue";
-      div.style.display = "inline-block";
+      div.className = "cell";
       document.getElementById("jam-space").appendChild(div);
     }
     var endLine = document.createElement("br");
     document.getElementById("jam-space").appendChild(endLine);;
   };
+</script>
+
+<script>
+  $(function() {
+    $(".cell").click(function() {
+      $(this).css("background-color", "green");
+    });
+  });
 </script>
 
 </html>
