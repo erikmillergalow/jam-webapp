@@ -54,7 +54,39 @@
 </body>
 
 <script>
+
+  // create MIDI grid (eventually will be modular for different instruments
+  for (var i = 0; i < 20; i++) {
+    for (var j = 0; j < 16; j++) {
+      var div = document.createElement('div');
+      div.className = 'cell';
+      div.id = 'cell'+ '-' + i + '-' + j;
+      document.getElementById('jam-space').appendChild(div);
+    }
+    var endLine = document.createElement('br');
+    document.getElementById('jam-space').appendChild(endLine);;
+  };
+
   var sessionName = {{ session_name_json }};
+
+  var gridSocket = new WebSocket('ws://' + window.location.host + '/ws/grid/' + sessionName + '/');
+
+  // set grid cell state based on changes received through websocket
+  gridSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var coordinates = data['coordinates'];
+    document.getElementById(coordinates).classList.toggle('active-cell');
+  };
+
+  gridSocket.onclose = function(e) {
+    console.error('Grid socket closed unexpectedly');
+  };
+
+  $('div.cell').click(function() {
+    gridSocket.send(JSON.stringify({
+      'coordinates': this.id
+    }));
+  });
 
   var chatSocket = new WebSocket(
     'ws://' + window.location.host + '/ws/chat/' + sessionName + '/');
@@ -87,29 +119,4 @@
   };
 
 </script>
-
-<script>
-  <!-- create MIDI grid -->
-  for (var i = 0; i < 20; i++) {
-    for (var j = 0; j < 16; j++) {
-      var div = document.createElement("div");
-      div.className = "cell";
-      document.getElementById("jam-space").appendChild(div);
-    }
-    var endLine = document.createElement("br");
-    document.getElementById("jam-space").appendChild(endLine);;
-  };
-</script>
-
-<script>
-  $(function() {
-
-    $(".cell").click(function() {
-      $(this).toggleClass("active-cell");
-    });
-
-  });
-</script>
-
-</html>
 
