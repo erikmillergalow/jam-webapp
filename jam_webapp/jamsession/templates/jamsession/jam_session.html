@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/jam_session.css' %}">
 </head>
@@ -36,10 +37,13 @@
       </div>
     </nav>
 
+    <!-- instrument area -->
+    <div id="jam-space" class="col-md-8 max-window-height">
 
-    <div class="col-md-8 max-window-height">
     </div>
-    <div class="col-sm-4 max-window-height">
+
+    <!-- chat area -->
+    <div id= "chat-space" class="col-sm-4 max-window-height">
       <textarea class="form-control rounded-0" id="chat-log", cols="100", rows="20"></textarea><br/>
       <input class="form-control rounded-0" id="chat-message-input" type="text" size="100"/><br/>
       <input class="btn btn-primary btn-block" id="chat-message-send" type="button" value="Send"/><br/>
@@ -50,7 +54,39 @@
 </body>
 
 <script>
+
+  // create MIDI grid (eventually will be modular for different instruments
+  for (var i = 0; i < 20; i++) {
+    for (var j = 0; j < 16; j++) {
+      var div = document.createElement('div');
+      div.className = 'cell';
+      div.id = 'cell'+ '-' + i + '-' + j;
+      document.getElementById('jam-space').appendChild(div);
+    }
+    var endLine = document.createElement('br');
+    document.getElementById('jam-space').appendChild(endLine);;
+  };
+
   var sessionName = {{ session_name_json }};
+
+  var gridSocket = new WebSocket('ws://' + window.location.host + '/ws/grid/' + sessionName + '/');
+
+  // set grid cell state based on changes received through websocket
+  gridSocket.onmessage = function(e) {
+    var data = JSON.parse(e.data);
+    var coordinates = data['coordinates'];
+    document.getElementById(coordinates).classList.toggle('active-cell');
+  };
+
+  gridSocket.onclose = function(e) {
+    console.error('Grid socket closed unexpectedly');
+  };
+
+  $('div.cell').click(function() {
+    gridSocket.send(JSON.stringify({
+      'coordinates': this.id
+    }));
+  });
 
   var chatSocket = new WebSocket(
     'ws://' + window.location.host + '/ws/chat/' + sessionName + '/');
@@ -81,6 +117,7 @@
 
     messageInputDom.value = '';
   };
-</script>
-</html>
 
+</script>
+
+</html>

@@ -2,6 +2,22 @@
   height: 100vh;
 }
 
+.cell {
+  background-color: white;
+}
+
+.active-cell {
+  background-color: green;
+}
+
 #chat-log {
   height: 75vh;
+}
+
+#jam-space div {
+  display: inline-block;
+  vertical-align: top;
+  border: 2px solid blue;
+  width: 40px;
+  height: 20px;
 }
