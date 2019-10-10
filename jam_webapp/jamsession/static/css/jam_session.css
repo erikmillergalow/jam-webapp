@@ -10,6 +10,10 @@
   background-color: green;
 }
 
+.playback-column {
+  background-color: yellow;
+}
+
 #chat-log {
   height: 75vh;
 }

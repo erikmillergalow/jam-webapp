@@ -118,6 +118,20 @@
     messageInputDom.value = '';
   };
 
+  var playbackLocation = 0;
+  //for (;;) {
+  setInterval(progressPlayback, 1000); 
+  playbackLocation++;
+  //}
+
+  function progressPlayback(currentLocation) {
+    var playbackColumn = document.querySelectorAll("div[id$='-" + currentLocation + "']");
+    print(playbackColumn.length);   
+    for (i = 0; i < playbackColumn.length; i++) {
+        playbackColumn[i].classList.toggle('playback-colunm');
+    } 
+  }
+
 </script>
 
 </html>
