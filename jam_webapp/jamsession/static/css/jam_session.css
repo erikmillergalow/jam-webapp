@@ -6,6 +6,10 @@
   background-color: white;
 }
 
+.playback-column {
+  background-color: red;
+}
+
 .active-cell {
   background-color: green;
 }
