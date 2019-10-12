@@ -118,19 +118,25 @@
     messageInputDom.value = '';
   };
 
-  var playbackLocation = 0;
-  //for (;;) {
-  setInterval(progressPlayback, 1000); 
-  playbackLocation++;
-  //}
+  // sound grid loop
+  let currentLocation = 0;
 
-  function progressPlayback(currentLocation) {
-    var playbackColumn = document.querySelectorAll("div[id$='-" + currentLocation + "']");
-    print(playbackColumn.length);   
-    for (i = 0; i < playbackColumn.length; i++) {
-        playbackColumn[i].classList.toggle('playback-colunm');
-    } 
+  function progressPlayback() {
+
+    console.log($("[id$=-" + currentLocation  + "]"));
+    $("[id$=-" + currentLocation  + "]").toggleClass("playback-column");
+    $("[id$=-" + (currentLocation - 1)  + "]").toggleClass("playback-column");
+    
+    if (currentLocation < 16) {
+      currentLocation++;
+    }
+    else {
+      currentLocation = 0;
+    }
+
   }
+
+  setInterval(progressPlayback, 300);
 
 </script>
 

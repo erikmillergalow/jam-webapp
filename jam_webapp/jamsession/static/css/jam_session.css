@@ -6,12 +6,12 @@
   background-color: white;
 }
 
-.active-cell {
-  background-color: green;
+.playback-column {
+  background-color: red;
 }
 
-.playback-column {
-  background-color: yellow;
+.active-cell {
+  background-color: green;
 }
 
 #chat-log {
